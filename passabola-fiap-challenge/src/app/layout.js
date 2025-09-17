@@ -22,12 +22,12 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="pt-br">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col h-full`}
 			>
 				<Header />
-				<div className="flex w-full h-full sticky">
+				<div className="w-full flex-1">
 					<Navegacao />
-					<div className="w-[86%]">{children}</div>
+					<div className="overflow-auto ml-48">{children}</div>
 				</div>
 			</body>
 		</html>

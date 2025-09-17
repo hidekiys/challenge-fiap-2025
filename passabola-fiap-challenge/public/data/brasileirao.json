@@ -1,0 +1,122 @@
+[
+	{
+		"clube": "Cruzeiro",
+		"pts": 36,
+		"pj": 15,
+		"vitorias": 11,
+		"empates": 3,
+		"derrotas": 1,
+		"gm": 35,
+		"gc": 15,
+		"sg": 20,
+		"ultimas_5": ["vitoria", "vitoria", "vitoria", "vitoria", "derrota"]
+	},
+	{
+		"clube": "Corinthians",
+		"pts": 34,
+		"pj": 15,
+		"vitorias": 10,
+		"empates": 4,
+		"derrotas": 1,
+		"gm": 46,
+		"gc": 12,
+		"sg": 34,
+		"ultimas_5": ["vitoria", "vitoria", "vitoria", "vitoria", "vitoria"]
+	},
+	{
+		"clube": "São Paulo",
+		"pts": 33,
+		"pj": 15,
+		"vitorias": 10,
+		"empates": 3,
+		"derrotas": 2,
+		"gm": 31,
+		"gc": 10,
+		"sg": 21,
+		"ultimas_5": ["vitoria", "vitoria", "vitoria", "vitoria", "vitoria"]
+	},
+	{
+		"clube": "Palmeiras",
+		"pts": 30,
+		"pj": 15,
+		"vitorias": 9,
+		"empates": 3,
+		"derrotas": 3,
+		"gm": 38,
+		"gc": 20,
+		"sg": 18,
+		"ultimas_5": ["empate", "derrota", "vitoria", "vitoria", "vitoria"]
+	},
+	{
+		"clube": "Flamengo",
+		"pts": 27,
+		"pj": 15,
+		"vitorias": 8,
+		"empates": 3,
+		"derrotas": 4,
+		"gm": 31,
+		"gc": 19,
+		"sg": 12,
+		"ultimas_5": ["vitoria", "derrota", "derrota", "vitoria", "vitoria"]
+	},
+	{
+		"clube": "Ferroviária",
+		"pts": 25,
+		"pj": 15,
+		"vitorias": 7,
+		"empates": 4,
+		"derrotas": 4,
+		"gm": 24,
+		"gc": 16,
+		"sg": 8,
+		"ultimas_5": ["derrota", "vitoria", "derrota", "vitoria", "derrota"]
+	},
+	{
+		"clube": "Esporte Clube Bahia",
+		"pts": 24,
+		"pj": 15,
+		"vitorias": 7,
+		"empates": 3,
+		"derrotas": 5,
+		"gm": 26,
+		"gc": 22,
+		"sg": 4,
+		"ultimas_5": ["derrota", "vitoria", "vitoria", "vitoria", "empate"]
+	},
+	{
+		"clube": "Bragantino",
+		"pts": 20,
+		"pj": 15,
+		"vitorias": 5,
+		"empates": 5,
+		"derrotas": 5,
+		"gm": 20,
+		"gc": 16,
+		"sg": 4,
+		"ultimas_5": ["empate", "derrota", "derrota", "vitoria", "vitoria"]
+	},
+	{
+		"clube": "América Mineiro",
+		"pts": 19,
+		"pj": 15,
+		"vitorias": 5,
+		"empates": 4,
+		"derrotas": 6,
+		"gm": 18,
+		"gc": 20,
+		"sg": -2,
+		"ultimas_5": ["derrota", "derrota", "vitoria", "derrota", "vitoria"]
+	},
+	{
+		"clube": "Fluminense",
+		"pts": 18,
+		"pj": 15,
+		"vitorias": 4,
+		"empates": 6,
+		"derrotas": 5,
+		"gm": 18,
+		"gc": 20,
+		"sg": -2,
+		"ultimas_5": ["derrota", "derrota", "vitoria", "empate", "empate"]
+	}
+]

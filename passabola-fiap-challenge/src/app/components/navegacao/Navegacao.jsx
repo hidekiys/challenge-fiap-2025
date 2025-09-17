@@ -22,7 +22,7 @@ const Navegacao = () => {
 	];
 
 	return (
-		<nav className="flex w-[12%] h-screen pt-5 shadow">
+		<nav className="fixed h-screen left-0 top-12 flex w-48 pt-5 shadow">
 			<ul className="w-full">
 				{paginas.map((e, index) => {
 					return (
