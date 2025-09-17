@@ -1,0 +1,19 @@
+[
+	{
+		"id": 1,
+		"nome": "Encontro passa a bola",
+		"local": "Arena Taboão da Serra",
+		"data": "16-09-2025",
+		"hora": "16:00",
+		"organizadora": "Maluf",
+		"max_jogadoras": 24,
+		"jogadoras": [
+			{
+				"nome": "Alana Vieira",
+				"id": 2,
+				"numero_camisa": "27",
+				"posicao": "meia"
+			}
+		]
+	}
+]

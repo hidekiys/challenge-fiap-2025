@@ -1,103 +1,99 @@
+"use client";
+
 import Image from "next/image";
+import Header from "./components/Header";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Noticia from "./components/Noticia";
+import Link from "next/link";
+import TabelaCampeonato from "./components/TabelaCampeonato";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+	const [jogos, setJogos] = useState([]);
+	const [jogo, setJogo] = useState(<h1>Você não possui próximos jogos</h1>);
+	const [loading, setLoading] = useState(true);
+	const [doMomento, setDoMomento] = useState([]);
+	const [campeonato, setCampeonato] = useState([]);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	useEffect(() => {
+		try {
+			axios.get("/data/jogos.json").then((response) => {
+				setJogos(response.data);
+			});
+
+			axios.get("/data/noticias.json").then((res) => {
+				setDoMomento(res.data);
+			});
+			axios.get("/data/brasileirao.json").then((res) => {
+				setCampeonato(res.data);
+			});
+		} catch (e) {
+			console.error(error);
+		} finally {
+			setLoading(false);
+		}
+	}, []);
+	useEffect(() => {
+		if (jogos.length > 0) {
+			setJogo(
+				<Link
+					href={`/jogo/${jogos[0].id}`}
+					className="p-5 shadow flex w-full justify-between align-middle rounded-2xl hover:scale-[101%] transition-all"
+				>
+					<div>
+						<h1 className="text-xl">{jogos[0].nome}</h1>
+						<p>{jogos[0].local}</p>
+						<p>{formatarData(jogos[0].data) + ", " + jogos[0].hora}</p>
+					</div>
+					<div className="flex flex-col items-end">
+						<p>
+							{jogos[0].jogadoras.length}/{jogos[0].max_jogadoras}
+						</p>
+						<button className="py-2 px-4 border rounded-xl border-cinza-principal">
+							Inscrita
+						</button>
+					</div>
+				</Link>
+			);
+		}
+	}, [jogos]);
+
+	return (
+		<div className="mt-8 mx-5 flex flex-col gap-5">
+			<h1 className="font-bold text-2xl ">Próximo jogo</h1>
+			{jogo}
+			<div className="flex">
+				<div className="w-3/5">
+					<h1 className="font-bold text-2xl mt-3">Do momento</h1>
+					<ul className="p-5 flex flex-col gap-3">
+						{doMomento.length > 0 ? (
+							doMomento.map((n) => {
+								return (
+									<Noticia
+										key={n.id}
+										titulo={n.manchete}
+										lide={n.lide}
+										id={n.id}
+										tipo={n.tipo}
+									/>
+								);
+							})
+						) : (
+							<h1>Não foi encontrado nada do momento.</h1>
+						)}
+					</ul>
+				</div>
+				<TabelaCampeonato campeonato={campeonato} />
+			</div>
+		</div>
+	);
+
+	function formatarData(dataString) {
+		if (!dataString || dataString.indexOf("-") === -1) {
+			return "Formato de data inválido";
+		}
+
+		const partes = dataString.split("-");
+		return partes.join("/");
+	}
 }
