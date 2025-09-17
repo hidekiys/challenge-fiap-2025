@@ -4,7 +4,7 @@ const Noticia = ({ titulo, lide, tipo, id }) => {
 	return (
 		<li>
 			<Link
-				href={`/noticias?id=${id}`}
+				href={`/noticias/${id}`}
 				className="shadow p-3 rounded-2xl flex justify-between hover:scale-[101%] transition-all"
 			>
 				<div className="flex flex-col">
