@@ -46,7 +46,7 @@ export default function Jogo() {
 							{jogo.jogadoras.length > 0 ? (
 								jogo.jogadoras.map((j) => {
 									return (
-										<li className="flex justify-between">
+										<li key={j.id} className="flex justify-between">
 											<p>{j.nome}</p>
 											<div className="flex gap-2">
 												<p>{j.numero_camisa}</p>
