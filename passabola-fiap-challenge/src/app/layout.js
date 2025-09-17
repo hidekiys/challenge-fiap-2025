@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
 				<Header />
 				<div className="flex w-full h-full sticky">
 					<Navegacao />
-					<div>{children}</div>
+					<div className="w-[86%]">{children}</div>
 				</div>
 			</body>
 		</html>

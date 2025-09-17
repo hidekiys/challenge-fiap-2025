@@ -5,7 +5,7 @@
 		"data": "16-09-2025",
 		"hora": "16:00",
 		"organizadora": "Maluf",
-		"max-jogadoras": 24,
+		"max_jogadoras": 24,
 		"jogadoras": [
 			{
 				"nome": "Alana Vieira",

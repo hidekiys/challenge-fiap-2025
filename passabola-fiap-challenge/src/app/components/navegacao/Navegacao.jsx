@@ -22,8 +22,8 @@ const Navegacao = () => {
 	];
 
 	return (
-		<nav className="flex w-[1/20] h-screen pt-5 shadow">
-			<ul>
+		<nav className="flex w-[12%] h-screen pt-5 shadow">
+			<ul className="w-full">
 				{paginas.map((e, index) => {
 					return (
 						<BotaoNavegacao
