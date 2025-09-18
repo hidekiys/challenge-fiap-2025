@@ -1,6 +1,8 @@
 {
 	"id": 2,
 	"nome": "Alana Vieira",
+	"user": "alanavieira",
+	"senha": "123",
 	"email": "alana.vieira@gmail.com",
 	"telefone": "11953410536",
 	"idade": 18,

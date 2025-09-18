@@ -1,12 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Noticia from "./components/Noticia";
+import Noticia from "../components/Noticia";
 import Link from "next/link";
-import TabelaCampeonato from "./components/TabelaCampeonato";
+import TabelaCampeonato from "../components/TabelaCampeonato";
 
 export default function Home() {
 	const [jogos, setJogos] = useState([]);
