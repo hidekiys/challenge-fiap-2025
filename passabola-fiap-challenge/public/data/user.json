@@ -1,0 +1,25 @@
+{
+	"id": 2,
+	"nome": "Alana Vieira",
+	"user": "alanavieira",
+	"senha": "123",
+	"email": "alana.vieira@gmail.com",
+	"telefone": "11953410536",
+	"idade": 18,
+	"time": {
+		"nome": "Corinthians FC",
+		"id": 1
+	},
+	"notificacoes": [
+		{
+			"data": "2025-09-17T03:47:21.000Z",
+			"titulo": "O jogo está próximo",
+			"link": "/jogo/1"
+		},
+		{
+			"data": "2025-09-17T03:47:21.000Z",
+			"titulo": "Vitória do Corinthians!",
+			"link": "/noticias/2"
+		}
+	]
+}

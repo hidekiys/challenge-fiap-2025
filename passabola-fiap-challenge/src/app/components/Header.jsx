@@ -1,4 +1,5 @@
 import { Bell } from "lucide-react";
+import Notificacoes from "./navegacao/Notificacoes";
 
 const Header = () => {
 	return (
@@ -6,9 +7,7 @@ const Header = () => {
 			<a href="/">
 				<img src="/img/logo-branca.png" className="w-full h-full" alt="" />
 			</a>
-			<div className="rounded-lg bg-white w-8 h-8 p-2 flex justify-center align-middle">
-				<Bell color="#EE4D9B" className="w-full  h-full" />
-			</div>
+			<Notificacoes />
 		</header>
 	);
 };

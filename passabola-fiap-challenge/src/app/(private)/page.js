@@ -1,12 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Noticia from "./components/Noticia";
+import Noticia from "../components/Noticia";
 import Link from "next/link";
-import TabelaCampeonato from "./components/TabelaCampeonato";
+import TabelaCampeonato from "../components/TabelaCampeonato";
 
 export default function Home() {
 	const [jogos, setJogos] = useState([]);
@@ -60,7 +58,16 @@ export default function Home() {
 
 	return (
 		<div className="mt-8 mx-5 flex flex-col gap-5">
-			<h1 className="font-bold text-2xl ">Próximo jogo</h1>
+			<div className="flex justify-between">
+				<h1 className="font-bold text-2xl ">Próximo jogo</h1>
+				<Link
+					href={"/jogos"}
+					className="hover:text-principal-600 transition-all"
+				>
+					ver todos
+				</Link>
+			</div>
+
 			{jogo}
 			<div className="flex">
 				<div className="w-3/5">
