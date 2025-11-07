@@ -1,4 +1,11 @@
-import { Home, Joystick, LoaderPinwheel, Shirt, User } from "lucide-react";
+import {
+	Home,
+	Joystick,
+	LoaderPinwheel,
+	Shirt,
+	User,
+	UsersRound,
+} from "lucide-react";
 import BotaoNavegacao from "./BotaoNavegacao";
 
 const Navegacao = () => {
@@ -15,9 +22,9 @@ const Navegacao = () => {
 			diretorio: "/jogos",
 		},
 		{
-			elemento: <Shirt className={btnClass} />,
-			texto: "meu time",
-			diretorio: "/meu-time",
+			elemento: <UsersRound className={btnClass} />,
+			texto: "comunidade",
+			diretorio: "/comunidade",
 		},
 		{
 			elemento: <User className={btnClass} />,

@@ -4,15 +4,15 @@ import User from "@/models/User";
 
 async function GET_HANDLER(request) {
 	await dbConnect();
-	const { searchParams } = request.nextUrl;
-	const user = await User.findById(searchParams.get("id")).select("-password");
-	if (!user) {
+	const { user } = request;
+	const bdUser = await User.findById(user.id).select("-password");
+	if (!bdUser) {
 		return Response.json(
 			{ message: "Usuário não encontrado." },
 			{ status: 404 }
 		);
 	}
-	return Response.json({ user });
+	return Response.json({ user: bdUser });
 }
 
 export const GET = protectedRoute(GET_HANDLER);

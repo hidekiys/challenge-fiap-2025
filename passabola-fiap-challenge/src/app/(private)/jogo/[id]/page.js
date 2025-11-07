@@ -1,24 +1,22 @@
 "use client";
 
-import axios from "axios";
+import api from "@/lib/axiosClient";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Jogo() {
-	const [jogos, setJogos] = useState([]);
 	const [jogo, setJogo] = useState(null);
 	const { id } = useParams();
 
 	useEffect(() => {
-		axios.get("/data/jogos.json").then((res) => {
-			setJogos(res.data);
-		});
+		buscarJogo();
 	}, []);
-	useEffect(() => {
-		if (jogos.length > 0) {
-			setJogo(jogos.find((j) => j.id == parseInt(id)));
-		}
-	}, [jogos]);
+
+	const buscarJogo = async () => {
+		await api.get(`/api/game/${id}`).then((res) => {
+			setJogo(res.data.game);
+		});
+	};
 	if (jogo == null) {
 		return <>Jogo não encontrado</>;
 	} else {
@@ -26,13 +24,17 @@ export default function Jogo() {
 			<div className="m-10 flex flex-col gap-3">
 				<div className="p-5 shadow flex w-full justify-between align-middle rounded-2xl ">
 					<div>
-						<h1 className="text-xl">{jogo.nome}</h1>
-						<p>{jogo.local}</p>
-						<p>{formatarData(jogo.data) + ", " + jogo.hora}</p>
+						<h1 className="text-xl">{jogo.title}</h1>
+						<p>{jogo.location}</p>
+						<p>
+							{formatarData(jogo.date).toLocaleDateString() +
+								", " +
+								formatarData(jogo.date).toLocaleTimeString()}
+						</p>
 					</div>
 					<div className="flex flex-col items-end">
 						<p>
-							{jogo.jogadoras.length}/{jogo.max_jogadoras}
+							{jogo.players?.length}/{jogo.maxPlayers}
 						</p>
 						<button className="py-2 px-4 border rounded-xl border-cinza-principal">
 							Inscrita
@@ -43,14 +45,13 @@ export default function Jogo() {
 					<div className="w-1/3 flex flex-col gap-3 min-h-80">
 						<h1 className="font-bold text-2xl">Jogadoras</h1>
 						<ul className="shadow rounded-lg flex flex-col gap-3 p-5 h-full">
-							{jogo.jogadoras.length > 0 ? (
-								jogo.jogadoras.map((j) => {
+							{jogo.players?.length > 0 ? (
+								jogo.players.map((j) => {
 									return (
-										<li key={j.id} className="flex justify-between">
-											<p>{j.nome}</p>
+										<li key={j._id} className="flex justify-between">
+											<p>{j.name}</p>
 											<div className="flex gap-2">
-												<p>{j.numero_camisa}</p>
-												<p>{j.posicao}</p>
+												<p>{j.position}</p>
 											</div>
 										</li>
 									);
@@ -67,11 +68,8 @@ export default function Jogo() {
 	}
 
 	function formatarData(dataString) {
-		if (!dataString || dataString.indexOf("-") === -1) {
-			return "Formato de data inválido";
-		}
+		const data = new Date(dataString);
 
-		const partes = dataString.split("-");
-		return partes.join("/");
+		return data;
 	}
 }

@@ -21,7 +21,7 @@ async function POST_HANDLER(request) {
 
 		const comment = await Comment.create({
 			text,
-			createdBy: user._id,
+			createdBy: user.id,
 			post: postId,
 		});
 

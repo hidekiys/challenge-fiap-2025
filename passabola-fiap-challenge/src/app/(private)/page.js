@@ -65,13 +65,4 @@ export default function Home() {
 			</div>
 		</div>
 	);
-
-	function formatarData(dataString) {
-		if (!dataString || dataString.indexOf("-") === -1) {
-			return "Formato de data inválido";
-		}
-
-		const partes = dataString.split("-");
-		return partes.join("/");
-	}
 }

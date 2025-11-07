@@ -5,23 +5,26 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-export default function Login() {
-	const [formLogin, setFormLogin] = useState({ email: "", password: "" });
+export default function Register() {
+	const [formRegister, setFormRegister] = useState({
+		name: "",
+		email: "",
+		password: "",
+	});
 	const router = useRouter();
 
-	const handleLogin = (e) => {
+	const handleRegister = (e) => {
 		e.preventDefault();
 		axios
-			.post("/api/auth/login", { ...formLogin })
+			.post("/api/auth/register", { ...formRegister })
 			.then((res) => {
-				document.cookie = `token=${res.data.token}`;
-				router.push("/");
+				router.push("/login");
 			})
 			.catch((e) => {
 				if (e.status == 401) {
 					alert("Usuário ou senha incorreta");
 				} else {
-					alert("Falha ao realizar o login");
+					alert("Falha ao realizar o registro");
 				}
 			});
 	};
@@ -29,24 +32,33 @@ export default function Login() {
 		<>
 			<div className="flex min-h-screen items-center justify-center overflow-hidden">
 				<form className="relative z-10 p-8 flex flex-col gap-2">
-					<div className="flex flex-col">
-						<h1 className="font-bold text-principal-600 text-5xl">LOGIN</h1>
+					<div className="flex flex-col gap-2">
+						<h1 className="font-bold text-principal-600 text-5xl">REGISTRO</h1>
 						<input
 							type="text"
 							className="border shadow border-gray-50 rounded-2xl py-2 px-4 w-[40vw] focus:outline-complementar-500"
-							placeholder="Digite seu login ou email..."
-							value={formLogin.email}
+							placeholder="Digite seu nome..."
+							value={formRegister.name}
 							onChange={(e) =>
-								setFormLogin({ ...formLogin, email: e.target.value })
+								setFormRegister({ ...formRegister, name: e.target.value })
+							}
+						/>
+						<input
+							type="text"
+							className="border shadow border-gray-50 rounded-2xl py-2 px-4 w-[40vw] focus:outline-complementar-500"
+							placeholder="Digite seu email..."
+							value={formRegister.email}
+							onChange={(e) =>
+								setFormRegister({ ...formRegister, email: e.target.value })
 							}
 						/>
 						<input
 							type="password"
-							className="border shadow border-gray-50 rounded-2xl py-2 px-4 w-[40vw] focus:outline-complementar-500 mt-2"
+							className="border shadow border-gray-50 rounded-2xl py-2 px-4 w-[40vw] focus:outline-complementar-500"
 							placeholder="Digite sua senha..."
-							value={formLogin.password}
+							value={formRegister.password}
 							onChange={(e) =>
-								setFormLogin({ ...formLogin, password: e.target.value })
+								setFormRegister({ ...formRegister, password: e.target.value })
 							}
 						/>
 					</div>
@@ -57,21 +69,21 @@ export default function Login() {
 								className="w-4 h-4 rounded-full border border-gray-200 shadow appearance-none peer hover:border-complementar-500 checked:bg-complementar-500 
                                 hover:border-2 transition-all"
 							/>
-							Lembrar de mim
+							Aceitar termos
 						</label>
 						<button
 							className="px-8 py-2 border-2 border-complementar-500 rounded-2xl text-complementar-500 font-bold text-2xl
                         hover:cursor-pointer hover:border-principal-600 hover:text-principal-600 transition-all
                         "
-							onClick={handleLogin}
+							onClick={handleRegister}
 						>
-							ENTRAR
+							REGISTRAR-SE
 						</button>
 					</div>
 					<h2 className="text-gray-400 text-lg self-center mt-6 font-light">
-						Ainda não tem uma conta?{" "}
-						<Link href="/register" className="text-principal-600">
-							Cadastre-se
+						Já tem uma conta?{" "}
+						<Link href="/registro" className="text-principal-600">
+							Logue-se
 						</Link>
 					</h2>
 				</form>

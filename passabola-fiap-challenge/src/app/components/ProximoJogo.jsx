@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "@/lib/axiosClient";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -10,10 +10,16 @@ export default function ProximoJogo() {
 		buscarProximoJogo();
 	}, []);
 
+	function formatarData(dataString) {
+		const data = new Date(dataString);
+
+		return data;
+	}
+
 	const buscarProximoJogo = async () => {
 		try {
 			setLoading(true);
-			const response = await axios.get("/api/user/game/next");
+			const response = await api.get("/api/user/game/next");
 			if (!response.ok) {
 			}
 			setProximoJogo(response.data);
@@ -32,17 +38,21 @@ export default function ProximoJogo() {
 	}
 	return (
 		<Link
-			href={`/jogo/${proximoJogo?.id}`}
+			href={`/jogo/${proximoJogo?._id}`}
 			className="p-5 shadow flex w-full justify-between align-middle rounded-2xl hover:scale-[101%] transition-all"
 		>
 			<div>
-				<h1 className="text-xl">{proximoJogo.nome}</h1>
-				<p>{proximoJogo.local}</p>
-				<p>{formatarData(proximoJogo.data) + ", " + proximoJogo.hora}</p>
+				<h1 className="text-xl">{proximoJogo.title}</h1>
+				<p>{proximoJogo.location}</p>
+				<p>
+					{formatarData(proximoJogo.date).toLocaleDateString() +
+						", " +
+						formatarData(proximoJogo.date).toLocaleTimeString()}
+				</p>
 			</div>
 			<div className="flex flex-col items-end">
 				<p>
-					{proximoJogo.jogadoras.length}/{proximoJogo.max_jogadoras}
+					{proximoJogo.players.length}/{proximoJogo.maxPlayers}
 				</p>
 				<button className="py-2 px-4 border rounded-xl border-cinza-principal">
 					Inscrita

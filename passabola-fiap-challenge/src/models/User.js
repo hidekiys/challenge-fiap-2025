@@ -6,6 +6,8 @@ const UserSchema = new mongoose.Schema({
 	password: { type: String, required: true },
 	time: { type: String, required: false },
 	idade: { type: Number, required: false },
+	imagemUrl: { type: String, required: false },
+	jogos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game" }],
 	posicao: { type: String, required: false },
 	createdAt: { type: Date, default: Date.now },
 });
