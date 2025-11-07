@@ -6,15 +6,15 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
-	const [formLogin, setFormLogin] = useState({ user: "", senha: "" });
+	const [formLogin, setFormLogin] = useState({ email: "", password: "" });
 	const router = useRouter();
 
 	const handleLogin = (e) => {
 		e.preventDefault();
 		axios
-			.post("/api/auth", { formLogin })
+			.post("/api/auth/login", { ...formLogin })
 			.then((res) => {
-				document.cookie = "token=logado";
+				document.cookie = `token=${res.data.token}`;
 				router.push("/");
 			})
 			.catch((e) => {
@@ -35,18 +35,18 @@ export default function Login() {
 							type="text"
 							className="border shadow border-gray-50 rounded-2xl py-2 px-4 w-[40vw] focus:outline-complementar-500"
 							placeholder="Digite seu login ou email..."
-							value={formLogin.user}
+							value={formLogin.email}
 							onChange={(e) =>
-								setFormLogin({ ...formLogin, user: e.target.value })
+								setFormLogin({ ...formLogin, email: e.target.value })
 							}
 						/>
 						<input
 							type="password"
 							className="border shadow border-gray-50 rounded-2xl py-2 px-4 w-[40vw] focus:outline-complementar-500 mt-2"
 							placeholder="Digite sua senha..."
-							value={formLogin.senha}
+							value={formLogin.password}
 							onChange={(e) =>
-								setFormLogin({ ...formLogin, senha: e.target.value })
+								setFormLogin({ ...formLogin, password: e.target.value })
 							}
 						/>
 					</div>
@@ -80,9 +80,6 @@ export default function Login() {
 
 				<div className="absolute -right-20 -top-20 h-[120%] w-3/5 rounded-l-full bg-principal-600 opacity-50 translate-x-80" />
 				<div className="absolute -right-20 -top-20 h-[120%] w-3/5 rounded-l-full bg-principal-600 translate-x-[50%]" />
-				<div className="absolute left-10 top-10 h-20 w-60 rounded-lg bg-principal-600 text-white p-3">
-					Professor o usuário: alanavieira; senha: 123;
-				</div>
 				<div className="absolute right-20 w-50 h-50 rounded-l-full">
 					<img src="img/logo-branca.png" className="h-full w-full" />
 				</div>
