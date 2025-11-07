@@ -5,6 +5,8 @@ import api from "@/lib/axiosClient";
 import PostCard from "@/app/components/PostCard";
 import NovoPost from "@/app/components/NovoPost";
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const fetchPosts = async (pageNumber, limit = 10) => {
 	const response = await api.get(`/api/post?page=${pageNumber}&limit=${limit}`);
 	return response.data;
@@ -29,6 +31,9 @@ export default function Comunidade() {
 		if (isLoading || !hasMore) return;
 
 		setIsLoading(true);
+
+		await sleep(10000);
+
 		try {
 			const { posts: newPosts, totalPages } = await fetchPosts(
 				page,
@@ -39,7 +44,6 @@ export default function Comunidade() {
 				const uniquePostsMap = new Map();
 
 				prevPosts.forEach((post) => uniquePostsMap.set(post._id, post));
-
 				newPosts.forEach((post) => uniquePostsMap.set(post._id, post));
 
 				return Array.from(uniquePostsMap.values());
@@ -53,11 +57,18 @@ export default function Comunidade() {
 			setIsLoading(false);
 		}
 	}, [isLoading, hasMore, page]);
+
 	const handlePostCreated = () => {
 		setPosts([]);
 		setPage(1);
 		setHasMore(true);
 	};
+
+	useEffect(() => {
+		if (page === 1 && posts.length === 0 && !isLoading) {
+			loadMorePosts();
+		}
+	}, [loadMorePosts, page, posts.length, isLoading]);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
@@ -66,13 +77,12 @@ export default function Comunidade() {
 					loadMorePosts();
 				}
 			},
-			{ root: null, rootMargin: "20px", threshold: 1.0 }
+			{ root: null, rootMargin: "-100px", threshold: 1.0 }
 		);
 
 		const currentTarget = observerTarget.current;
 		if (currentTarget) {
 			observer.observe(currentTarget);
-			if (posts.length === 0 && page === 1) loadMorePosts();
 		}
 
 		return () => {
@@ -80,7 +90,7 @@ export default function Comunidade() {
 				observer.unobserve(currentTarget);
 			}
 		};
-	}, [isLoading, hasMore, loadMorePosts, posts.length, page]);
+	}, [isLoading, hasMore, loadMorePosts]);
 
 	return (
 		<>
